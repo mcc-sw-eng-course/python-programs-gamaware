@@ -1,7 +1,7 @@
 # Course: TC4002 Analysis, Design and Construction of Software Systems
 # Enrollment: A00354776
 # Author: Alex Garcia
-# Excercise: L3
+# Excercise: L1-8
 # File name: statfunctions.py
 # Description: module containing different math and statistical functions
 # Date created: 02/11/2019
