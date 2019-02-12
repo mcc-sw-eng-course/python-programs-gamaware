@@ -1,7 +1,7 @@
 # Course: TC4002 Analysis, Design and Construction of Software Systems
 # Enrollment: A00354776
 # Author: Alex Garcia
-# Excercise: L2-14
+# Excercise: L2-13-14
 # File name: readingfile.py
 # Description: class to read values for a list from a textfile
 # Date created: 02/11/2019
