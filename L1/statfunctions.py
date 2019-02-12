@@ -4,7 +4,7 @@
 # Excercise: L3
 # File name: statfunctions.py
 # Description: module containing different math and statistical functions
-# Date created: 02/01/2019
+# Date created: 02/11/2019
 # Date last modified: 02/11/2019
 # Python Version:  3.7.2
 
