@@ -3,7 +3,7 @@
 # Author: Alex Garcia
 # Excercise: L3
 # File name: decimaltoroman.py
-# Description: module containing different math and statistical functions
+# Description: module with function to convert from decimal numbers to roman numbers
 # Date created: 02/11/2019
 # Date last modified: 02/11/2019
 # Python Version:  3.7.2
