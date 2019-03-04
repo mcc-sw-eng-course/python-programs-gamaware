@@ -1,0 +1,64 @@
+@startuml
+
+title Problem 2: Digital Customer Correspondence System
+
+abstract class Person {
+    -name: string
+}
+
+
+abstract class Location {
+    -cityName: string
+    -internationalAddress: string
+    -zipCode: int
+    -country: string
+    -dditionalInfo: string {optional}
+}
+
+class GermanAddress {
+    -streetName: string
+    -addressNumber: int
+}
+
+class Company{
+    -companyName: string
+}
+
+class Letter {
+    -title: string
+    -body: string
+    -customerData: Customer
+    -letterDate: Dates
+    -signature: Correspondent
+    +writeLetter(signature)
+}
+
+class Customer {
+    -customerNumber: int
+	-customerAdddres: GermanAddress
+}
+
+class Correspondent {
+    -employeeNumber: int
+}
+
+class Dates {
+    -day: int
+    -month: int
+    -year: int
+    +generateDate(day, month, year)
+    +extractWeekday()
+	+CalculateRelationShipStartDate(day, month, year)
+    
+}
+
+Person <|-- Customer
+Person <|-- Correspondent
+Location <|-- GermanAddress
+Correspondent "1" o-- "0...n" Letter: writes >
+Company "1" *-- "1..n" Correspondent: employs >
+Customer "1" -- "0...n" Letter
+Letter "1..n"  --o "1" Dates:has >
+GermanAddress "1" o-- "1" Customer
+
+@enduml
