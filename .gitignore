@@ -1,0 +1,8 @@
+# Course Files to be Ignored bit git #
+######################################
+2019-ADCS-Syllabus.pdf
+Lectures/
+Labs/*.docx
+Labs/*.pdf
+Readings/
+
