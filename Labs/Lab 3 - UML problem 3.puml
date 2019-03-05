@@ -1,0 +1,62 @@
+@startuml
+
+title Problem 3: Sequence Diagram for the Digital Customer Correspondence System
+
+actor Correspondent
+control System
+database Database
+
+
+autonumber
+Correspondent -> System : Creates Empty Letter
+System -> Database : Checks Customer existence
+alt Customer exists
+Database [#blue]-> Correspondent : Confirms customer existence
+autonumber 3
+System -> Letter : Adds current date
+note right: Automatically
+Correspondent -> System : Writes Letter
+System -> Correspondent : Request Saving
+Correspondent -> Letter : Saves Letter
+
+System -> Correspondent : Request Printing
+alt Printing confirmation
+Correspondent -> System : Send Printing Job
+System -> NetworkAttachedPrinter : Renders Letter for Printing
+else Printing not required
+autonumber 8
+Correspondent -> System : Denies Printing Job
+System -> Correspondent : Sends completion of program message
+end
+
+
+else Customer doesn't exist
+autonumber 4
+Database [#blue]-> Correspondent : Prompts for completion of the customer data
+Correspondent -> System : Completes customer data
+System -> Database : Saves customer data
+Database [#blue]-> Correspondent : Confirms customer existence
+autonumber 6
+System -> Letter : Adds current date
+note right: Automatically
+Correspondent -> System : Writes Letter
+System -> Correspondent : Request Saving
+Correspondent -> Letter : Saves Letter
+
+System -> Correspondent : Request Printing
+alt Printing confirmation
+Correspondent -> System : Send Printing Job
+System -> NetworkAttachedPrinter : Renders Letter for Printing
+else Printing not required
+autonumber 11
+System -> Correspondent : Request Printing
+Correspondent -> System : Denies Printing Job
+System -> Correspondent : Sends completion of program message
+end
+
+
+end
+
+entity NetworkAttachedPrinter
+
+@enduml
