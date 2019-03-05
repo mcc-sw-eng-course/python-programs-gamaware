@@ -1,0 +1,48 @@
+@startuml
+
+title Problem 4: State Diagram for Access Control System
+
+[*] --> FunctioningDoor
+ClosedDoor --> OpenDoor : Entered Code\n[Code = Correct]
+OpenDoor --> ClosedDoor : Correct Entered Code\n[Close = 30 Seconds]
+OpenDoor --> OpenDoor: Time Taken by Motor\n[Time < 7.5 Seconds]
+ClosedDoor --> ClosedDoor: Time Taken by Motor\n[Time < 7.5 Seconds]
+
+
+
+OpenDoor --> FunctioningConsole : Door not Fully Closed\n[Alarm Tone = True]
+FunctioningConsole --> LockedDoor: Door not Fully Closed
+FunctioningDoor --> [*]
+
+
+state FunctioningDoor as "Functioning Door" {
+state FACS as "Functioning ACS"
+FACS --> OpenDoor : Button\n[Push = True]
+note left of ClosedDoor : Internal Behavior
+
+
+state "Closed Door" as ClosedDoor  {
+state SolenoidTurnedOn as "Solenoid Turned On"
+state ReleasedLock as "Released Lock"
+ReleasedLock --> ReleasedLock: Door not Opening\n[Aborted Procedure = 5 Seconds]
+SolenoidTurnedOn --> ReleasedLock : Releasing Lock
+}
+
+
+
+state "Open Door" as OpenDoor {
+}
+
+
+state "Locked Door" as LockedDoor {
+}
+}
+
+state FunctioningConsole as "Functioning Console" {
+state DoorStatus as "Door Status" 
+OpenDoor --> DoorStatus : Show Open\n[Acknowledgements and Warnings = False] \n\nShow Time\n[Format HH:MM:SS]
+ClosedDoor --> DoorStatus : Show Closed\n[Acknowledgements and Warnings = False] \n\nShow Time\n[Format HH:MM:SS]
+}
+
+
+@enduml
