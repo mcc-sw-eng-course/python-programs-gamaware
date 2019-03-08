@@ -11,6 +11,7 @@
 # Begin code
 from pathlib import Path
 import csv
+import os
 from datetime import datetime
 
 # Magic strings for the performance data map
@@ -187,10 +188,14 @@ class Sorter:
             fCallToMainClass.quickSort(extractData[0],0,1048575)
         else:
             print("You didn't select a valid option") 
-        try:
+        pass
+
+        if os.path.isfile("output.csv"):
+            os.remove("output.csv")
             fCallToMainClass.set_output_data("output.csv")
-        except:
-            raise ValueError("File already exists!")
+        else:
+            fCallToMainClass.set_output_data("output.csv")
+
         fCallToMainClass.get_performance_data()    
        
 def main():
@@ -198,6 +203,7 @@ def main():
     callToMainClass.defineAlgorithm()
     #selectedAgorithm = callToMainClass.defineAlgorithm()
     #callToMainClass.selectedAgorithm(extractData[0])
+    input('Press ENTER to exit')
 
 if __name__ == "__main__":
 	main()
