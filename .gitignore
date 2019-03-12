@@ -9,6 +9,6 @@ Lectures/
 Readings/
 Summaries/*.docx
 Summaries/*.pdf
-.git
 .idea
+venv
 
