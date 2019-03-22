@@ -1,14 +1,14 @@
-# Course: TC4002 Analysis, Design and Construction of Software Systems
-# Enrollment: AA00354798, A01223463, A00354776
-# Author: Samuel Solorzano Ramirez, Bruno Vergaray, Alex Garcia
-# Excercise: L8
-# File name: tictactoe.py
-# Description: Sorting DDesign a game to play Tic-Tac-Toe (Gato)
-# The interface could be text-based or graphical
-# The program should implement the logic to play against one human player
-# Add a test file explaining how you design the game
-# Be prepare to define classes for a future checkers gameata using different algorithms
+"""
+Matricula: AA00354798
+Nombre: Samuel Solorzano Ramirez
 
+Development Exercises - L8
+Design a game to play Tic-Tac-Toe (Gato)
+The interface could be text-based or graphical
+The program should implement the logic to play against one human player
+Add a test file explaining how you design the game
+Be prepare to define classes for a future checkers game
+"""
 
 from random import randint
 
@@ -51,9 +51,7 @@ def check_win(board, player):
 
 def computer_move(board, computer_selection):
     moves = return_valid_moves(board)
-    print(moves)
     move = randint(0, len(moves)-1)
-    print(move)
     board[moves[move]] = computer_selection
 
 def game_is_tie(board):
