@@ -1,14 +1,3 @@
-# Course: TC4002 Analysis, Design and Construction of Software Systems
-# Enrollment: A01223463, A00354776 
-# Author: Bruno Vergaray, Alex Garcia
-# Excercise: L9
-# File name: Checkers.py
-# Description: Checkers Game
-# Date created: 04/07/2019
-# Date last modified: 04/07/2019
-# Python Version:  3.7.2
-
-# Begin code
 # amo a ver si sale esto
 
 import random
@@ -63,32 +52,23 @@ def inputPlayerLetter():
     # the first element in the list is the player’s letter, the second is
     # computer's letter.
     if letter == 'B':
-        return ['░', '▓']
+        return ['B', 'W']
     else:
-        return ['▓', '░']
+        return ['W', 'B']
 
-
-def turn(v):
-    #Lleva el control de quien tenga el turno
-
-    if v == True:
-        return 'whites'
-    else:
-        return 'blacks'
-
-# def whoGoesFirst():
-#     # Randomly choose the player who goes first.
-#     if random.randint(0, 1) == 0:
-#         return 'computer'
-#     else:
-#         return 'player'
 def playAgain():
     #This function returns True if the player wants to play again, otherwise it returns False
     print('Do you want to play again? (yes or no)')
     return input().lower().startswith('y')
 
 def makeMove(board,letter,move):
-    board[move] = letter
+    board[move] = letter #assign letter to box
+
+def readChecker(board, slot):
+    if board[slot] == EC:
+        return 'empty cell'
+    else:
+        return 'occupied cell'
 
 def isWinner(bo):
     #Given a board and a player's letter, this function returns True if that player has won.
@@ -101,26 +81,7 @@ def isWinner(bo):
            (bo[16] == " " and bo[17] == " " and bo[18] == " " and bo[19] == " " and bo[20] == " " and bo[21] == " " and bo[22] == " " and bo[23] == " ") or  # down the right side
            (bo[8] == " " and bo[9] == " " and bo[10] == " " and bo[11] == " " and bo[12] == " " and bo[13] == " " and bo[14] == " " and bo[15] == " ") or  # diagonal
            (bo[0] == " " and bo[1] == " " and bo[2] == " " and bo[3] == " " and bo[4] == " " and bo[5] == " " and bo[6] == " " and bo[7] == " "))  # diagonal
-def getBoardCopy(board):
-    #Make a duplicate of the board list and return it the duplicate.
-    dupeBoard = []
 
-    for i in board:
-        dupeBoard.append(i)
-    return dupeBoard
-
-def isSpaceFree(board, move):
-    #Return true if the passed move is free on the passed board.
-    return board[move] == ' '
-
-def getPlayerMove(board):
-    # Let the player type in their move
-    move = ' '
-    box = '0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63'
-    while move not in box.split() or not isSpaceFree(board, int(move)):
-        print('What is your next move? (1-9)')
-        move = input()
-    return int(move)
 
 def chooseRandomMoveFromList(board, movesList):
     #Returns a valid move from the passed list on the passed board.
@@ -135,47 +96,43 @@ def chooseRandomMoveFromList(board, movesList):
     else:
         return None
 
-def getComputerMove(board, computerLetter):
-    # Given a board and the computer's letter, determine where to move and return that move
-    if computerLetter == 'X':
-        playerLetter = 'O'
-    else:
-        playerLetter = 'X'
-
-    #Here is our algorithm for our checkers AI:
-    #First, check if we can win in the next move
-
-    for i in range(1,10):
-        copy = getBoardCopy(board)
-        if isSpaceFree(copy, i):
-            makeMove(copy, computerLetter, i)
-            if isWinner(copy):
-                return i
-
-    #Check if the player could win on their next move, and block them.
-
-    for i in range(1,10):
-        copy = getBoardCopy(board)
-        if isSpaceFree(copy, i):
-            makeMove(copy,playerLetter, i)
-            if isWinner(copy):
-                return i
-
-
-
+#main
 print('Welcome to Py-Checkers!')
 
 while True:
-
+    #Reset the board
     playerLetter, computerLetter = inputPlayerLetter()
     board = init_grid()
     theBoard = drawBoard(board)
-    v = True
+    #theTurn = True #Whites start the move
+    turn = "B"
 
-    while 1:
-        if turn(v) == 'whites':
-            print ('The ' + turn(v) + ' will go first.')
-            break
-        if turn(v) == 'blacks':
-            print ('The ' + turn(v) + ' will go first.')
-            break
+
+    while True:
+        if turn == "W":
+            turn = "B"
+        else:
+            turn = "W"
+        print(turn,"'s turn")
+        print ('select a slot')
+
+        read = int(input())
+
+        select = readChecker(board, read)
+        if select == 'occupied cell':
+            print("seleccione Izq o dcha (1 o 2)")
+            movement = int(input())
+                if movement == 1:
+                    board[read] = EC
+                    if turn == "W":
+                        board[read+7] = WP
+                    if turn == "B":
+                        board[read-9] = BP
+                    drawBoard(board)
+                if movement == 2:
+                    board[read] = EC
+                    if turn == "W":
+                        board[read+9] = WC
+                    if turn == "B":
+                        board[read-7] = BP
+                    drawBoard(board)
